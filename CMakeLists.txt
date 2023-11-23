@@ -9,7 +9,4 @@ aux_source_directory(./src ALGORITHM_SRC)
 add_executable(
         AlgorithmFinalWork
         ${ALGORITHM_SRC}
-        include/DataBase.h
-        src/DataBase.cpp
-        include/Initializer.h
 )
