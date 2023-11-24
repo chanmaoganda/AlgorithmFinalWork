@@ -1,15 +1,8 @@
 # ninja log v5
-455	794	7224558165403492	AlgorithmFinalWork.exe	6e3ef39f12e63449
-5	386	7224558161398444	CMakeFiles/AlgorithmFinalWork.dir/src/main.cpp.obj	abcf6a2411c7eef1
-8	455	7224558162069509	CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj	fd924c887126fc88
-1	416	7224558161703536	CMakeFiles/AlgorithmFinalWork.dir/src/Initializer.cpp.obj	e022a1f38757ad3d
-1	104	7224894815619718	build.ninja	d07188ab369015e5
-5	932	7224903122103845	CMakeFiles/AlgorithmFinalWork.dir/src/Tests.cpp.obj	52da49ccd0409020
-21	933	7224903122123845	CMakeFiles/AlgorithmFinalWork.dir/src/main.cpp.obj	abcf6a2411c7eef1
-11	934	7224903122123845	CMakeFiles/AlgorithmFinalWork.dir/src/DataController.cpp.obj	fb079a4ff2af089c
-16	990	7224903122688014	CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj	fd924c887126fc88
-991	1716	7224903129783706	AlgorithmFinalWork.exe	d381611fd88fdea8
-5	744	7224905984871437	CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj	fd924c887126fc88
-745	1353	7224905990787924	AlgorithmFinalWork.exe	d381611fd88fdea8
-3	740	7224906162026035	CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj	fd924c887126fc88
 740	1356	7224906168016613	AlgorithmFinalWork.exe	d381611fd88fdea8
+21	933	7224903122123845	CMakeFiles/AlgorithmFinalWork.dir/src/main.cpp.obj	abcf6a2411c7eef1
+3	740	7224906162026035	CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj	fd924c887126fc88
+1	416	7224558161703536	CMakeFiles/AlgorithmFinalWork.dir/src/Initializer.cpp.obj	e022a1f38757ad3d
+1	104	7225214195663363	build.ninja	d07188ab369015e5
+5	932	7224903122103845	CMakeFiles/AlgorithmFinalWork.dir/src/Tests.cpp.obj	52da49ccd0409020
+11	934	7224903122123845	CMakeFiles/AlgorithmFinalWork.dir/src/DataController.cpp.obj	fb079a4ff2af089c
