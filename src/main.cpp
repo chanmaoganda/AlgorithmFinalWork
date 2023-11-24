@@ -1,12 +1,11 @@
 #include <iostream>
-#include "../include/Initializer.h"
+#include "../include/DataController.h"
 #include "../include/Tests.h"
 
 int main() {
-    Initializer initializer = Initializer();
+    DataController initializer = DataController();
 
     initializer.getPAlgorithmData1()->Print();
 
-    bool isSame;
     return 0;
 }

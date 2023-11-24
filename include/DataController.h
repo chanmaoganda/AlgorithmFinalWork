@@ -4,11 +4,13 @@
 #include "DataBase.h"
 
 
-class Initializer{
+class DataController{
 public:
-    Initializer();
+    DataController();
 
-    ~Initializer();
+    ~DataController();
+
+    DataController(DataController&& dataController) noexcept;
 
     void OnInitialize();
 

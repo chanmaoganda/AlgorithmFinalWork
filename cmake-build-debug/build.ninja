@@ -56,8 +56,15 @@ build CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj: CXX_COMPILER__Algo
   OBJECT_DIR = CMakeFiles\AlgorithmFinalWork.dir
   OBJECT_FILE_DIR = CMakeFiles\AlgorithmFinalWork.dir\src
 
-build CMakeFiles/AlgorithmFinalWork.dir/src/Initializer.cpp.obj: CXX_COMPILER__AlgorithmFinalWork_unscanned_Debug E$:/CXX_codes/AlgorithmFinalWork/src/Initializer.cpp || cmake_object_order_depends_target_AlgorithmFinalWork
-  DEP_FILE = CMakeFiles\AlgorithmFinalWork.dir\src\Initializer.cpp.obj.d
+build CMakeFiles/AlgorithmFinalWork.dir/src/DataController.cpp.obj: CXX_COMPILER__AlgorithmFinalWork_unscanned_Debug E$:/CXX_codes/AlgorithmFinalWork/src/DataController.cpp || cmake_object_order_depends_target_AlgorithmFinalWork
+  DEP_FILE = CMakeFiles\AlgorithmFinalWork.dir\src\DataController.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IE:/CXX_codes/AlgorithmFinalWork/./include
+  OBJECT_DIR = CMakeFiles\AlgorithmFinalWork.dir
+  OBJECT_FILE_DIR = CMakeFiles\AlgorithmFinalWork.dir\src
+
+build CMakeFiles/AlgorithmFinalWork.dir/src/Tests.cpp.obj: CXX_COMPILER__AlgorithmFinalWork_unscanned_Debug E$:/CXX_codes/AlgorithmFinalWork/src/Tests.cpp || cmake_object_order_depends_target_AlgorithmFinalWork
+  DEP_FILE = CMakeFiles\AlgorithmFinalWork.dir\src\Tests.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/CXX_codes/AlgorithmFinalWork/./include
   OBJECT_DIR = CMakeFiles\AlgorithmFinalWork.dir
@@ -78,7 +85,7 @@ build CMakeFiles/AlgorithmFinalWork.dir/src/main.cpp.obj: CXX_COMPILER__Algorith
 #############################################
 # Link the executable AlgorithmFinalWork.exe
 
-build AlgorithmFinalWork.exe: CXX_EXECUTABLE_LINKER__AlgorithmFinalWork_Debug CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj CMakeFiles/AlgorithmFinalWork.dir/src/Initializer.cpp.obj CMakeFiles/AlgorithmFinalWork.dir/src/main.cpp.obj
+build AlgorithmFinalWork.exe: CXX_EXECUTABLE_LINKER__AlgorithmFinalWork_Debug CMakeFiles/AlgorithmFinalWork.dir/src/DataBase.cpp.obj CMakeFiles/AlgorithmFinalWork.dir/src/DataController.cpp.obj CMakeFiles/AlgorithmFinalWork.dir/src/Tests.cpp.obj CMakeFiles/AlgorithmFinalWork.dir/src/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\AlgorithmFinalWork.dir
