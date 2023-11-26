@@ -1,19 +1,36 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 
+#include<map>
+
 #include "DataController.h"
 
 class Algorithms{
 public:
-    Algorithms();
+    Algorithms() = default;
 
-    ~Algorithms();
+    ~Algorithms() = default;
 
-    bool CheckIsValid(bool (*solvingProblem) (const std::vector<int>& dataBases, const std::vector<int>& solutions));
-public:
-    bool isTrue;
+    static void Check();
+
+    static bool CheckIsValid(bool (*SolvingProblem) (const std::vector<int>& dataBases, const std::vector<int>& solutions, const int&),
+                      const DataController& dataController);
+
+    static bool DynamicAssignments(const std::vector<int>& dataBases, const std::vector<int>& solutions, const int& targetValue) ;
+
+    static bool BackTracing(const std::vector<int>& dataBases, const std::vector<int>& solutions, const int& targetValue) ;
+
+    static bool BranchAndBound(const std::vector<int>& dataBases, const std::vector<int>& solutions, const int& targetValue) ;
+
 protected:
-    DataController dataController;
+    static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
+
 };
+
+//动态规划 回溯 分支限界
+
+
+
+
 
 #endif //ALGORITHMS_H
