@@ -7,6 +7,8 @@
 
 class Solutions{
 public:
+    explicit Solutions(int maxSize);
+
     explicit Solutions(int maxSize, std::initializer_list<int> initializerList1, std::initializer_list<int> initializerList2,
                        std::initializer_list<int> initializerList3);
 
@@ -28,7 +30,7 @@ protected:
     static std::vector<int> SingleAssign(std::initializer_list<int> list);
 
 protected:
-    std::vector<int>* resolutionArray_;
+    std::vector<int>* solutionArray_;
     int maxSize_;
 };
 
@@ -41,7 +43,7 @@ public:
 public:
     void AssignValues(std::initializer_list<int> list);
 
-    void AssignResolutions(std::initializer_list<int> initializerList1,
+    void AssignSolutions(std::initializer_list<int> initializerList1,
                            std::initializer_list<int> initializerList2,
                            std::initializer_list<int> initializerList3);
 
@@ -58,13 +60,13 @@ public:
     std::vector<int> &getValues();
 
     _GLIBCXX_NODISCARD
-    Solutions &getResolutions();
+    Solutions &getSolutions();
 
 protected:
     int targetValue_;
     int maxSize_;
     std::vector<int> values_;
-    Solutions resolutions_;
+    Solutions solutions_;
 };
 
 

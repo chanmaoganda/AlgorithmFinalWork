@@ -5,25 +5,33 @@
 
 #include "DataController.h"
 
+
 class Algorithms{
 public:
+    typedef bool(*SolveProblem)(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue, std::vector<std::vector<int>>& resultsStored);
+    typedef std::vector<int>::const_iterator Iterator;
+    typedef std::pair<bool, std::vector<int>> Pair;
+
     Algorithms() = default;
 
     ~Algorithms() = default;
 
     static void Check();
 
-    static bool CheckIsValid(bool (*SolvingProblem) (const std::vector<int>& dataBases, const std::vector<int>& solutions, const int&),
-                      const DataController& dataController);
+    static bool CheckIsValid(SolveProblem solveProblem, const DataController& dataController);
 
-    static bool DynamicAssignments(const std::vector<int>& dataBases, const std::vector<int>& solutions, const int& targetValue) ;
+    // those three methods shall judge whether the algorithm result is valid of the solutions given
+    static bool DynamicAssignments(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue, std::vector<std::vector<int>>& resultsStored) ;
 
-    static bool BackTracing(const std::vector<int>& dataBases, const std::vector<int>& solutions, const int& targetValue) ;
+    static bool BackTracing(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue, std::vector<std::vector<int>>& resultsStored);
 
-    static bool BranchAndBound(const std::vector<int>& dataBases, const std::vector<int>& solutions, const int& targetValue) ;
+    static bool BranchAndBound(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue, std::vector<std::vector<int>>& resultsStored) ;
 
 protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
+
+    static void BackTracing_(const std::vector<int>& dataBases, std::vector<int> solutions, const int& targetValue, int currentValue, Iterator iterator,
+                             std::vector<std::vector<int>>& resultsStored);
 
 };
 
