@@ -17,7 +17,7 @@ void DataController::OnInitialize() {
         pAlgorithmData1->AssignValues({15, 22, 14, 26, 32, 9, 16, 8});
         pAlgorithmData2->AssignValues({41, 34, 21, 20, 8, 7, 7, 4, 3, 3});
         pAlgorithmData3->AssignValues({81, 80, 43, 40, 30, 26, 12, 11, 9});
-        pAlgorithmData1->AssignResolutions({}, {}, {});
+        pAlgorithmData1->AssignSolutions({}, {}, {});
 }
 
 AlgorithmData *DataController::getPAlgorithmData1() const {
