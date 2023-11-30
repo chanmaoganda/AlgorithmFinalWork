@@ -16,8 +16,6 @@ public:
 
     ~Algorithms() = default;
 
-    static void Check();
-
     static bool CheckIsValid(SolveProblem solveProblem, const DataController& dataController);
 
     // those three methods shall judge whether the algorithm result is valid of the solutions given
@@ -30,8 +28,8 @@ public:
 protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
 
-    static void BackTracing_(const std::vector<int>& dataBases, std::vector<int> solutions, const int& targetValue, int currentValue, Iterator iterator,
-                             std::vector<int>& resultsStored);
+    static void BackTracing_(const std::vector<int>& dataBases, std::vector<int>& resultsStored, const int& targetValue,
+                             int currentValue, Iterator iterator);
 
 };
 
