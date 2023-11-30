@@ -31,7 +31,7 @@ protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
 
     static void BackTracing_(const std::vector<int>& dataBases, std::vector<int> solutions, const int& targetValue, int currentValue, Iterator iterator,
-                             std::vector<std::vector<int>>& resultsStored);
+                             std::vector<int>& resultsStored);
 
 };
 

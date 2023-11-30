@@ -19,10 +19,8 @@ void AlgorithmData::Print() {
     std::cout << "\n";
 }
 
-void AlgorithmData::AssignSolutions(std::initializer_list<int> initializerList1,
-                                      std::initializer_list<int> initializerList2,
-                                      std::initializer_list<int> initializerList3) {
-    solutions_.Assign(initializerList1, initializerList2, initializerList3);
+void AlgorithmData::AssignSolutions(std::initializer_list<int> list) {
+    solutions_.Assign(list);
 }
 
 int AlgorithmData::getTargetValue() const {
@@ -44,23 +42,17 @@ Solutions &AlgorithmData::getSolutions() {
 
 Solutions::Solutions(int maxSize) :
     maxSize_(maxSize),
-    solutionArray_(new std::vector<int>[3] ){
+    solutionArray_(std::vector<int>()){
 }
 
 Solutions::Solutions(int maxSize,
-                     std::initializer_list<int> initializerList1,
-                     std::initializer_list<int> initializerList2,
-                     std::initializer_list<int> initializerList3) :
+                     std::initializer_list<int> initializerList) :
     maxSize_(maxSize),
-    solutionArray_(new std::vector<int>[3] ) {
-    Assign(initializerList1, initializerList2, initializerList3);
+    solutionArray_(std::vector<int>()) {
+    Assign(initializerList);
 }
 
-Solutions::~Solutions() {
-    delete [] solutionArray_;
-}
-
-std::vector<int> *Solutions::getResolutionArray() const {
+std::vector<int> Solutions::getSolutionArray() const {
     return solutionArray_;
 }
 
@@ -75,10 +67,7 @@ std::vector<int> Solutions::SingleAssign(std::initializer_list<int> list) {
     return singleArray;
 }
 
-void Solutions::Assign(std::initializer_list<int> initializerList1, std::initializer_list<int> initializerList2,
-                       std::initializer_list<int> initializerList3) {
-    solutionArray_[0] = std::move( SingleAssign(initializerList1) );
-    solutionArray_[1] = std::move( SingleAssign(initializerList2) );
-    solutionArray_[2] = std::move( SingleAssign(initializerList3) );
+void Solutions::Assign(std::initializer_list<int> list) {
+    solutionArray_ = std::move( SingleAssign(list) );
 }
 
