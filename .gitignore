@@ -5,3 +5,4 @@
 *ninja_deps
 *.exe
 cmake-build-debug/
+.idea/
