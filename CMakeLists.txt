@@ -9,6 +9,4 @@ aux_source_directory(./src ALGORITHM_SRC)
 add_executable(
         AlgorithmFinalWork
         ${ALGORITHM_SRC}
-        src/Algorithms.cpp
-        include/Algorithms.h
 )

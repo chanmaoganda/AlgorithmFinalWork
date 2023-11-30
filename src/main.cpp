@@ -10,6 +10,9 @@ int main() {
 
     Algorithms algorithms = Algorithms();
 
+    bool valid = Algorithms::CheckIsValid(Algorithms::BackTracing, initializer);
+
+    std::cout << valid << "\n";
 
     return 0;
 }
