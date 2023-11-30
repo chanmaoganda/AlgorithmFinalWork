@@ -3,20 +3,21 @@
 AlgorithmData::AlgorithmData(int targetValue, int maxSize) :
     targetValue_(targetValue),
     maxSize_(maxSize),
-    values_(std::move( std::vector<int> (0) ) ),
     solutions_(Solutions(maxSize)) {
 }
 //TODO: why values_ initialization can be passed by std::move, while resolutions cannot???
 
 void AlgorithmData::AssignValues(std::initializer_list<int> list) {
-    for(int number : list)
+    for(int number : list) {
         values_.push_back(number);
+    }
 }
 
 void AlgorithmData::Print() {
+    std::cout << "number list :\n";
     for(int number : values_)
         std::cout << number << " ";
-    std::cout << "\n";
+    std::cout << "\n\n";
 }
 
 void AlgorithmData::AssignSolutions(std::initializer_list<int> list) {
@@ -38,7 +39,6 @@ std::vector<int> &AlgorithmData::getValues() {
 Solutions &AlgorithmData::getSolutions() {
     return solutions_;
 }
-
 
 Solutions::Solutions(int maxSize) :
     maxSize_(maxSize),

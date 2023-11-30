@@ -5,11 +5,9 @@ bool Algorithms::CompareSolutions(const std::vector<int> &solved, const std::vec
         return false;
     auto solve = solved.cbegin();
     auto target = targeted.cbegin();
-    while(solve != solved.cend() && target != targeted.cend()) {
-        if(*solve != *target)
+    while(solve != solved.cend()) {
+        if(*solve++ != *target++)
             return false;
-        solve++;
-        target++;
     }
 
     if(solve != solved.cend())
@@ -19,37 +17,64 @@ bool Algorithms::CompareSolutions(const std::vector<int> &solved, const std::vec
     return true;
 }
 
-//TODO : compare various results to given
-bool Algorithms::CheckIsValid(Algorithms::SolveProblem solveProblem, const DataController& dataController) {
-    AlgorithmData* algorithmData;
+int Algorithms::sumValues(const std::vector<int> &values) {
+    int sum = 0;
+    for(auto &number : values)
+        sum += number;
+    return sum;
+}
 
-    algorithmData = dataController.getPAlgorithmData1();
-    bool validation = solveProblem(algorithmData->getValues(),
-                                   algorithmData->getSolutions(),
-                                   algorithmData->getTargetValue());
-    algorithmData = dataController.getPAlgorithmData2();
-    validation |= solveProblem(algorithmData->getValues(),
-                               algorithmData->getSolutions(),
-                               algorithmData->getTargetValue());
-    algorithmData = dataController.getPAlgorithmData3();
-    validation |= solveProblem(algorithmData->getValues(),
-                               algorithmData->getSolutions(),
-                               algorithmData->getTargetValue());;
+void Algorithms::PrintDataBaseInfo(DataController* dataController) {
+    std::cout << "\n      Database 1\n";
+    dataController->getPAlgorithmData1()->Print();
+    std::cout << "      Database 2\n";
+    dataController->getPAlgorithmData2()->Print();
+    std::cout << "      Database 3\n";
+    dataController->getPAlgorithmData3()->Print();
+}
 
-    //TODO : check whether those methods is valid
+bool Algorithms::CheckAllDataBases(DataController* dataController) {
+    PrintDataBaseInfo(dataController);
+    bool validation = true;
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController);
+//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController);
+//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController);
     return validation;
 }
 
-// two kinds of assignments: divided by sum / divided by numbers of the subset
+bool Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::SolveProblem solveProblem, const DataController& dataController) {
+    AlgorithmData* algorithmData;
+    bool validation = true;
+
+    algorithmData = dataController.getPAlgorithmData1();
+    validation &= solveProblem(algorithmData->getValues(),
+                                   algorithmData->getSolutions(),
+                                   algorithmData->getTargetValue());
+
+    algorithmData = dataController.getPAlgorithmData2();
+    validation &= solveProblem(algorithmData->getValues(),
+                               algorithmData->getSolutions(),
+                               algorithmData->getTargetValue());
+
+    algorithmData = dataController.getPAlgorithmData3();
+    validation &= solveProblem(algorithmData->getValues(),
+                               algorithmData->getSolutions(),
+                               algorithmData->getTargetValue());
+
+    return validation;
+}
+
 bool Algorithms::DynamicAssignments(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
 
     return false;
 }
 
 bool Algorithms::BackTracing(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
-    std::vector<int> resultsStored = std::vector<int>();
-    BackTracing_(dataBases, resultsStored, targetValue, 0, dataBases.cbegin());
-    return CompareSolutions(resultsStored, solutions.getSolutionArray());
+    std::vector<int> resultsStored = std::vector<int>(dataBases.size());
+    int sum = sumValues(dataBases);
+    if( BackTracing_(dataBases, resultsStored, targetValue, 0, sum,dataBases.cbegin()) )
+        return CompareSolutions(resultsStored, solutions.getSolutionArray());
+    return false;
 }
 
 bool Algorithms::BranchAndBound(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
@@ -73,8 +98,29 @@ bool Algorithms::BranchAndBound(const std::vector<int> &dataBases, const Solutio
 //    return BackTracing_(dataBases, solutions, targetValue, currentValue, ++iterator, resultsStored);
 //}
 
-void Algorithms::BackTracing_(const std::vector<int> &dataBases, std::vector<int>& resultsStored, const int &targetValue,
-                              int currentValue, Iterator iterator) {
-
-
+bool Algorithms::BackTracing_(const std::vector<int> &dataBases, std::vector<int>& results, const int &targetValue,
+                              int currentValue, int leftValue, Iterator iterator) {
+    // iterator is from the dataBases
+    if(iterator == dataBases.cend()) {
+        if (currentValue == targetValue)
+            return true;
+        return false;
+    }
+    leftValue -= *iterator;
+    if(currentValue + *iterator <= targetValue) {
+        results[iterator - dataBases.cbegin()] = 1;
+        currentValue += *iterator;
+        if(BackTracing_(dataBases, results, targetValue, currentValue, leftValue, iterator + 1))
+            return true;
+        currentValue -= *iterator;
+    }
+    if(currentValue + leftValue >= targetValue) {
+        results[iterator - dataBases.cbegin()] = 0;
+        if(BackTracing_(dataBases, results, targetValue, currentValue, leftValue, iterator + 1))
+            return true;
+    }
+    return false;
 }
+
+
+

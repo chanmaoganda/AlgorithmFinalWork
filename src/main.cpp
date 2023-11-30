@@ -4,15 +4,9 @@
 #include "../include/Algorithms.h"
 
 int main() {
-    DataController initializer = DataController();
+    Tests tests = Tests();
 
-    initializer.getPAlgorithmData1()->Print();
-
-    Algorithms algorithms = Algorithms();
-
-    bool valid = Algorithms::CheckIsValid(Algorithms::BackTracing, initializer);
-
-    std::cout << valid << "\n";
+    tests.Processing();
 
     return 0;
 }
