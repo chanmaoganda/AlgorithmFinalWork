@@ -10,7 +10,6 @@ class Algorithms{
 public:
     typedef bool(*SolveProblem)(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
     typedef std::vector<int>::const_iterator Iterator;
-    typedef std::pair<bool, std::vector<int>> Pair;
 
     Algorithms() = default;
 

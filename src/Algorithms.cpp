@@ -81,7 +81,6 @@ bool Algorithms::BranchAndBound(const std::vector<int> &dataBases, const Solutio
     return false;
 }
 
-
 //void Algorithms::BackTracing_(const std::vector<int> &dataBases, std::vector<int> solutions, const int &targetValue,
 //                              int currentValue, Iterator iterator, std::vector<int>& resultsStored) {
 //    if(currentValue == targetValue) {

@@ -14,7 +14,7 @@ void AlgorithmData::AssignValues(std::initializer_list<int> list) {
 }
 
 void AlgorithmData::Print() {
-    std::cout << "number list :\n";
+    std::cout << "   number list :\n";
     for(int number : values_)
         std::cout << number << " ";
     std::cout << "\n\n";
@@ -32,11 +32,11 @@ int AlgorithmData::getMaxSize() const {
     return maxSize_;
 }
 
-std::vector<int> &AlgorithmData::getValues() {
+const std::vector<int> &AlgorithmData::getValues() const{
     return values_;
 }
 
-Solutions &AlgorithmData::getSolutions() {
+const Solutions &AlgorithmData::getSolutions() const{
     return solutions_;
 }
 
@@ -45,14 +45,14 @@ Solutions::Solutions(int maxSize) :
     solutionArray_(std::vector<int>()){
 }
 
-Solutions::Solutions(int maxSize,
-                     std::initializer_list<int> initializerList) :
-    maxSize_(maxSize),
-    solutionArray_(std::vector<int>()) {
-    Assign(initializerList);
-}
+//Solutions::Solutions(int maxSize,
+//                     std::initializer_list<int> list) :
+//    maxSize_(maxSize),
+//    solutionArray_(std::vector<int>()) {
+//    Assign(list);
+//}
 
-std::vector<int> Solutions::getSolutionArray() const {
+const std::vector<int>& Solutions::getSolutionArray() const {
     return solutionArray_;
 }
 

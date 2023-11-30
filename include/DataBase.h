@@ -9,13 +9,13 @@ class Solutions{
 public:
     explicit Solutions(int maxSize);
 
-    explicit Solutions(int maxSize, std::initializer_list<int> initializerList1);
+//    explicit Solutions(int maxSize, std::initializer_list<int> list);
 
     ~Solutions() = default;
 
 public:
     _GLIBCXX_NODISCARD
-    std::vector<int> getSolutionArray() const;
+    const std::vector<int>& getSolutionArray() const;
 
     _GLIBCXX_NODISCARD
     int getMaxSize() const;
@@ -52,10 +52,10 @@ public:
     int getMaxSize() const;
 
     _GLIBCXX_NODISCARD
-    std::vector<int> &getValues();
+    const std::vector<int> &getValues() const;
 
     _GLIBCXX_NODISCARD
-    Solutions &getSolutions();
+    const Solutions &getSolutions() const;
 
 protected:
     int targetValue_;
