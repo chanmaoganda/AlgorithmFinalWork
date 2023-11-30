@@ -1,3 +1,8 @@
 *.obj
 *.xml
 *.log
+*.ninja_log
+*ninja_deps
+*.exe
+cmake-build-debug/
+.idea/

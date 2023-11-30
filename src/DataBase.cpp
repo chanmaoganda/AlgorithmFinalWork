@@ -3,20 +3,21 @@
 AlgorithmData::AlgorithmData(int targetValue, int maxSize) :
     targetValue_(targetValue),
     maxSize_(maxSize),
-    values_(std::move( std::vector<int> (0) ) ),
     solutions_(Solutions(maxSize)) {
 }
 //TODO: why values_ initialization can be passed by std::move, while resolutions cannot???
 
 void AlgorithmData::AssignValues(std::initializer_list<int> list) {
-    for(int number : list)
+    for(int number : list) {
         values_.push_back(number);
+    }
 }
 
 void AlgorithmData::Print() {
+    std::cout << "   number list :\n";
     for(int number : values_)
         std::cout << number << " ";
-    std::cout << "\n";
+    std::cout << "\n\n";
 }
 
 void AlgorithmData::AssignSolutions(std::initializer_list<int> list) {
@@ -31,28 +32,27 @@ int AlgorithmData::getMaxSize() const {
     return maxSize_;
 }
 
-std::vector<int> &AlgorithmData::getValues() {
+const std::vector<int> &AlgorithmData::getValues() const{
     return values_;
 }
 
-Solutions &AlgorithmData::getSolutions() {
+const Solutions &AlgorithmData::getSolutions() const{
     return solutions_;
 }
-
 
 Solutions::Solutions(int maxSize) :
     maxSize_(maxSize),
     solutionArray_(std::vector<int>()){
 }
 
-Solutions::Solutions(int maxSize,
-                     std::initializer_list<int> initializerList) :
-    maxSize_(maxSize),
-    solutionArray_(std::vector<int>()) {
-    Assign(initializerList);
-}
+//Solutions::Solutions(int maxSize,
+//                     std::initializer_list<int> list) :
+//    maxSize_(maxSize),
+//    solutionArray_(std::vector<int>()) {
+//    Assign(list);
+//}
 
-std::vector<int> Solutions::getSolutionArray() const {
+const std::vector<int>& Solutions::getSolutionArray() const {
     return solutionArray_;
 }
 

@@ -10,13 +10,14 @@ class Algorithms{
 public:
     typedef bool(*SolveProblem)(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
     typedef std::vector<int>::const_iterator Iterator;
-    typedef std::pair<bool, std::vector<int>> Pair;
 
     Algorithms() = default;
 
     ~Algorithms() = default;
 
-    static bool CheckIsValid(SolveProblem solveProblem, const DataController& dataController);
+    static bool CheckAllDataBases(DataController* dataController);
+
+    static bool CheckIsValidOfSingleAlgorithm(SolveProblem solveProblem, const DataController& dataController);
 
     // those three methods shall judge whether the algorithm result is valid of the solutions given
     static bool DynamicAssignments(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue) ;
@@ -28,9 +29,11 @@ public:
 protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
 
-    static void BackTracing_(const std::vector<int>& dataBases, std::vector<int>& resultsStored, const int& targetValue,
-                             int currentValue, Iterator iterator);
+    static int sumValues(const std::vector<int>& values);
 
+    static bool BackTracing_(const std::vector<int>& dataBases, std::vector<int>& results, const int& targetValue,
+                             int currentValue, int leftValue,Iterator iterator);
+    static void PrintDataBaseInfo(DataController *dataController);
 };
 
 //动态规划 回溯 分支限界

@@ -14,13 +14,13 @@ DataController::~DataController() {
 }
 
 void DataController::OnInitialize() {
-        pAlgorithmData1->AssignValues({41, 34, 21, 20, 8, 7, 7, 4, 3, 3});
-        pAlgorithmData2->AssignValues({81, 80, 43, 40, 30, 26, 12, 11, 9});
-        pAlgorithmData3->AssignValues({1, 2, 4, 8, 16, 32});
+    pAlgorithmData1->AssignValues({41, 34, 21, 20, 8, 7, 7, 4, 3, 3});
+    pAlgorithmData2->AssignValues({81, 80, 43, 40, 30, 26, 12, 11, 9});
+    pAlgorithmData3->AssignValues({1, 2, 4, 8, 16, 32});
 
-        pAlgorithmData1->AssignSolutions({1, 1, 0, 0, 0, 0, 1, 0});
-        pAlgorithmData2->AssignSolutions({0, 0, 1, 0, 1, 1, 1, 1, 0, 1});
-        pAlgorithmData3->AssignSolutions({0, 1, 1, 0, 1, 0});
+    pAlgorithmData1->AssignSolutions({0, 0, 1, 0, 1, 1, 1, 1, 1, 0});
+    pAlgorithmData2->AssignSolutions({0, 1, 0, 0, 0, 0, 0, 1, 1});
+    pAlgorithmData3->AssignSolutions({0, 1, 1, 0, 1, 0});
 }
 
 AlgorithmData *DataController::getPAlgorithmData1() const {
