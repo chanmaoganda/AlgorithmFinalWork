@@ -37,8 +37,8 @@ bool Algorithms::CheckAllDataBases(DataController* dataController) {
     PrintDataBaseInfo(dataController);
     bool validation = true;
     validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController);
-//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController);
-//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController);
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController);
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController);
     return validation;
 }
 
