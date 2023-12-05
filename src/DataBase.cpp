@@ -62,7 +62,7 @@ int Solutions::getMaxSize() const {
 
 std::vector<int> Solutions::SingleAssign(std::initializer_list<int> list) {
     std::vector<int> singleArray;
-    for(int number : list)
+    for(auto& number : list)
         singleArray.push_back(number);
     return singleArray;
 }

@@ -1,10 +1,9 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 
-#include<map>
-
+#include <deque>
+#include <algorithm>
 #include "DataController.h"
-
 
 class Algorithms{
 public:
@@ -32,7 +31,9 @@ protected:
     static int sumValues(const std::vector<int>& values);
 
     static bool BackTracing_(const std::vector<int>& dataBases, std::vector<int>& results, const int& targetValue,
-                             int currentValue, int leftValue,Iterator iterator);
+                             int currentValue, int leftValue, Iterator iterator);
+
+    static std::vector<int> BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, Algorithms::Iterator iterator);
     static void PrintDataBaseInfo(DataController *dataController);
 };
 

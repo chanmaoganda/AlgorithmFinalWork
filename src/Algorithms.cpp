@@ -25,7 +25,8 @@ int Algorithms::sumValues(const std::vector<int> &values) {
 }
 
 void Algorithms::PrintDataBaseInfo(DataController* dataController) {
-    std::cout << "\n      Database 1\n";
+    std::cout << "\n" <<
+                 "      Database 1\n";
     dataController->getPAlgorithmData1()->Print();
     std::cout << "      Database 2\n";
     dataController->getPAlgorithmData2()->Print();
@@ -78,33 +79,19 @@ bool Algorithms::BackTracing(const std::vector<int> &dataBases, const Solutions 
 }
 
 bool Algorithms::BranchAndBound(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
+    std::vector<int> resultsStored = std::vector<int>(dataBases.size());
     return false;
 }
 
-//void Algorithms::BackTracing_(const std::vector<int> &dataBases, std::vector<int> solutions, const int &targetValue,
-//                              int currentValue, Iterator iterator, std::vector<int>& resultsStored) {
-//    if(currentValue == targetValue) {
-//        resultsStored = std::move(solutions);
-//        return;
-//    }
-//    if(iterator == dataBases.end())
-//        return;
-//    if(currentValue + *iterator > targetValue) {
-//        return BackTracing_(dataBases, solutions, targetValue, currentValue, ++iterator, resultsStored);
-//    }
-//    solutions[iterator - dataBases.begin()] = 1;
-//    currentValue += *iterator;
-//    return BackTracing_(dataBases, solutions, targetValue, currentValue, ++iterator, resultsStored);
-//}
-
 bool Algorithms::BackTracing_(const std::vector<int> &dataBases, std::vector<int>& results, const int &targetValue,
-                              int currentValue, int leftValue, Iterator iterator) {
+                              int currentValue, int leftValue, Algorithms::Iterator iterator) {
     // iterator is from the dataBases
     if(iterator == dataBases.cend()) {
         if (currentValue == targetValue)
             return true;
         return false;
     }
+
     leftValue -= *iterator;
     if(currentValue + *iterator <= targetValue) {
         results[iterator - dataBases.cbegin()] = 1;
@@ -120,6 +107,21 @@ bool Algorithms::BackTracing_(const std::vector<int> &dataBases, std::vector<int
     }
     return false;
 }
+
+std::vector<int> Algorithms::BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, Algorithms::Iterator iterator) {
+    std::deque<int> deque = std::deque<int>();
+    deque.push_back(*iterator);
+    //TODO : how to store various results in order and saves it?
+    return {};
+}
+
+
+
+
+
+
+
+
 
 
 
