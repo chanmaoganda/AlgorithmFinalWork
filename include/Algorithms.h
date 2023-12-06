@@ -1,18 +1,22 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 
-#include <deque>
+#include <queue>
 #include <algorithm>
+#include <bitset>
 #include "DataController.h"
+
 
 class Algorithms{
 public:
     typedef bool(*SolveProblem)(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
     typedef std::vector<int>::const_iterator Iterator;
 
-    Algorithms() = default;
 
-    ~Algorithms() = default;
+
+    Algorithms() = delete;
+
+    ~Algorithms() = delete;
 
     static bool CheckAllDataBases(DataController* dataController);
 
@@ -28,19 +32,43 @@ public:
 protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
 
-    static int sumValues(const std::vector<int>& values);
+    static int sumValues(const std::vector<int>& dataBases);
 
     static bool BackTracing_(const std::vector<int>& dataBases, std::vector<int>& results, const int& targetValue,
                              int currentValue, int leftValue, Iterator iterator);
 
-    static std::vector<int> BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, Algorithms::Iterator iterator);
+    static bool JudgeIfTargetReached(const int &currentValue, const int &targetValue, std::string bitset, std::vector<int> &resultsStored);
+
+    static bool BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
+
     static void PrintDataBaseInfo(DataController *dataController);
 };
 
-//动态规划 回溯 分支限界
+class Node {
+public:
+    explicit Node(std::string bitset, Algorithms::Iterator iterator, int currentValue, int leftValue);
 
+    ~Node() = default;
 
+    Node(const Node &) = default;
 
+    _GLIBCXX_NODISCARD
+    std::string getBitset() const;
 
+    _GLIBCXX_NODISCARD
+    int getCurrentValue() const;
+
+    _GLIBCXX_NODISCARD
+    int getLeftValue() const;
+
+    _GLIBCXX_NODISCARD
+    const Algorithms::Iterator &getIterator() const;
+
+protected:
+    std::string bitset_;
+    Algorithms::Iterator iterator_;
+    int currentValue_;
+    int leftValue_;
+};
 
 #endif //ALGORITHMS_H

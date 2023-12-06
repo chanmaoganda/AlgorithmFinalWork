@@ -29,4 +29,6 @@ protected:
     AlgorithmData* pAlgorithmData3;
 };
 
+
+
 #endif //INITIALIZER_H

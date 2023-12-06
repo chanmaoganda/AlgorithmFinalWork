@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "../include/DataController.h"
 
 DataController::DataController() :
@@ -40,5 +42,4 @@ DataController::DataController(DataController &&dataController)  noexcept :
     pAlgorithmData2(dataController.pAlgorithmData2),
     pAlgorithmData3(dataController.pAlgorithmData3) {
 }
-
 
