@@ -6,6 +6,7 @@
 #include <bitset>
 #include "DataController.h"
 
+class Node;
 
 class Algorithms{
 public:
@@ -23,25 +24,32 @@ public:
     static bool CheckIsValidOfSingleAlgorithm(SolveProblem solveProblem, const DataController& dataController);
 
     // those three methods shall judge whether the algorithm result is valid of the solutions given
-    static bool DynamicAssignments(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue) ;
+    static bool DynamicAssignments(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
 
     static bool BackTracing(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
 
-    static bool BranchAndBound(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue) ;
+    static bool BranchAndBound(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
 
+//some general functions needed
 protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
 
     static int sumValues(const std::vector<int>& dataBases);
+
+    static void PrintDataBaseInfo(DataController *dataController);
+
+protected:
 
     static bool BackTracing_(const std::vector<int>& dataBases, std::vector<int>& results, const int& targetValue,
                              int currentValue, int leftValue, Iterator iterator);
 
     static bool JudgeIfTargetReached(const int &currentValue, const int &targetValue, std::string bitset, std::vector<int> &resultsStored);
 
+    static void ReInitData(const Node& node, Algorithms::Iterator &iterator, int &currentValue, int &leftValue);
+
     static bool BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 
-    static void PrintDataBaseInfo(DataController *dataController);
+    static bool DynamicAssignments_();
 };
 
 class Node {
