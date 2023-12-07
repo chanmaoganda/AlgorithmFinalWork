@@ -2,7 +2,6 @@
 #define DATA_H
 
 #include <vector>
-#include <bitset>
 #include <iostream>
 
 class Solutions{

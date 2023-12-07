@@ -37,8 +37,7 @@ bool Algorithms::DynamicAssignments(const std::vector<int> &dataBases, const Sol
 
 bool Algorithms::BackTracing(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
     std::vector<int> resultsStored = std::vector<int>(dataBases.size());
-    int sum = sumValues(dataBases);
-    if( BackTracing_(dataBases, resultsStored, targetValue, 0, sum,dataBases.cbegin()) )
+    if( BackTracing_(dataBases, resultsStored, targetValue, 0, sumValues(dataBases),dataBases.cbegin()) )
         return CompareSolutions(resultsStored, solutions.getSolutionArray());
     return false;
 }
@@ -105,6 +104,8 @@ bool Algorithms::BranchAndBound_(const std::vector<int> &dataBases, const int &t
 }
 
 bool Algorithms::DynamicAssignments_() {
+
     return false;
 }
+
 

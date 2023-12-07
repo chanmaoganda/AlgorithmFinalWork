@@ -33,15 +33,18 @@ void Algorithms::PrintDataBaseInfo(DataController* dataController) {
     dataController->getPAlgorithmData3()->Print();
 }
 
+void Algorithms::Bitset2Vector(std::string bitset, std::vector<int> &results) {
+    while(bitset.size() < results.size())
+        bitset += '0';
+    for(int i = 0; i < results.size(); i++)
+        results[i] = bitset[i] - '0';
+}
+
 bool Algorithms::JudgeIfTargetReached(const int &currentValue, const int &targetValue, std::string bitset, std::vector<int> &resultsStored) {
     if(currentValue != targetValue)
         return false;
     // we need to complete the missing elements of `bitset`, cause the total useful size is smaller than the targeted solution size always
-    while(bitset.size() < resultsStored.size())
-        bitset += '0';
-    for(int i = 0; i < resultsStored.size(); i++) {
-        resultsStored[i] = bitset[i] - '0';
-    }
+    Bitset2Vector(std::move(bitset), resultsStored);
     return true;
 }
 

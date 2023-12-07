@@ -1,7 +1,6 @@
 #ifndef TESTS_H
 #define TESTS_H
 
-#include "DataController.h"
 #include "Algorithms.h"
 
 class Tests{

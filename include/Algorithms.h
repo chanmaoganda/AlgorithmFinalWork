@@ -3,7 +3,6 @@
 
 #include <queue>
 #include <algorithm>
-#include <bitset>
 #include "DataController.h"
 
 class Node;
@@ -42,6 +41,8 @@ protected:
 
     static bool BackTracing_(const std::vector<int>& dataBases, std::vector<int>& results, const int& targetValue,
                              int currentValue, int leftValue, Iterator iterator);
+
+    static void Bitset2Vector(std::string bitset, std::vector<int> &results);
 
     static bool JudgeIfTargetReached(const int &currentValue, const int &targetValue, std::string bitset, std::vector<int> &resultsStored);
 
