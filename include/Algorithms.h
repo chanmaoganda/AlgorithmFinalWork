@@ -4,15 +4,16 @@
 #include <queue>
 #include <algorithm>
 #include "DataController.h"
+#include "Timer.h"
+#include "BenchMark.h"
 
 class Node;
+class Slot;
 
 class Algorithms{
 public:
     typedef bool(*SolveProblem)(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
     typedef std::vector<int>::const_iterator Iterator;
-
-
 
     Algorithms() = delete;
 
@@ -20,7 +21,7 @@ public:
 
     static bool CheckAllDataBases(DataController* dataController);
 
-    static bool CheckIsValidOfSingleAlgorithm(SolveProblem solveProblem, const DataController& dataController);
+    static bool CheckIsValidOfSingleAlgorithm(SolveProblem solveProblem, const DataController& dataController, const char* algorithmName);
 
     // those three methods shall judge whether the algorithm result is valid of the solutions given
     static bool DynamicAssignments(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
@@ -29,7 +30,7 @@ public:
 
     static bool BranchAndBound(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
 
-//some general functions needed
+    //some general functions needed
 protected:
     static bool CompareSolutions(const std::vector<int>& solved, const std::vector<int>& targeted);
 
@@ -50,7 +51,9 @@ protected:
 
     static bool BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 
-    static bool DynamicAssignments_();
+    static Slot getSlot(const int &number, const int &num, Slot *slot);
+
+    static bool DynamicAssignments_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 };
 
 class Node {
@@ -78,6 +81,32 @@ protected:
     Algorithms::Iterator iterator_;
     int currentValue_;
     int leftValue_;
+};
+
+class Slot {
+public:
+    explicit Slot();
+
+    explicit Slot(int level, bool isReachable, std::string bitset);
+
+    ~Slot() = default;
+
+    Slot(const Slot &) = default;
+
+    _GLIBCXX_NODISCARD
+    int getLevel() const;
+
+    _GLIBCXX_NODISCARD
+    bool getIsReachable() const;
+
+    _GLIBCXX_NODISCARD
+    const std::string &getBitset() const;
+
+protected:
+    int level_;
+    bool isReachable_;
+    std::string bitset_;
+
 };
 
 #endif //ALGORITHMS_H

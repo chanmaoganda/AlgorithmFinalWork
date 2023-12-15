@@ -11,6 +11,9 @@ public:
 
     void Processing();
 
+    [[nodiscard]]
+    DataController *getDataController() const;
+
     void OutputFinalResults() const;
 
 protected:

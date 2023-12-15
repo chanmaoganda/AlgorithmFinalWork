@@ -1,22 +1,22 @@
 #include "../include/Algorithms.h"
 
 bool Algorithms::CheckAllDataBases(DataController* dataController) {
-    PrintDataBaseInfo(dataController);
     bool validation = true;
-    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController);
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController, "BackTracing");
 //    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController);
-    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController);
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController, "BranchAndBound");
     return validation;
 }
 
-bool Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::SolveProblem solveProblem, const DataController& dataController) {
+bool Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::SolveProblem solveProblem, const DataController& dataController, const char* algorithmName) {
+    BenchMark benchMark(algorithmName);
     AlgorithmData* algorithmData;
     bool validation = true;
 
     algorithmData = dataController.getPAlgorithmData1();
     validation &= solveProblem(algorithmData->getValues(),
-                                   algorithmData->getSolutions(),
-                                   algorithmData->getTargetValue());
+                               algorithmData->getSolutions(),
+                               algorithmData->getTargetValue());
 
     algorithmData = dataController.getPAlgorithmData2();
     validation &= solveProblem(algorithmData->getValues(),
@@ -103,8 +103,15 @@ bool Algorithms::BranchAndBound_(const std::vector<int> &dataBases, const int &t
     return false;
 }
 
-bool Algorithms::DynamicAssignments_() {
-
+bool Algorithms::DynamicAssignments_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored) {
+//    std::vector< std::vector<int> > array = std::vector< std::vector<int> >();
+//    Slot *slots = new Slot[targetValue];
+//
+//    for(int i = 0; i < dataBases.size(); i++) {
+//        for(int j = 0; j < targetValue; j++) {
+//
+//        }
+//    }
     return false;
 }
 

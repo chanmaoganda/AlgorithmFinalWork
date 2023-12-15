@@ -10,4 +10,8 @@ aux_source_directory(./src ALGORITHM_SRC)
 add_executable(
         AlgorithmFinalWork
         ${ALGORITHM_SRC}
+        include/Timer.h
+        src/Timer.cpp
+        include/BenchMark.h
+        src/BenchMark.cpp
 )

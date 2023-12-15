@@ -10,6 +10,7 @@ Tests::~Tests() {
 }
 
 void Tests::OutputFinalResults() const {
+    std::cout << "\n";
     if(isValid_)
         std::cout << "\033[32m all databases and algorithms passed!\n"
                      "\tCongratulations!\033[0m\n";
@@ -20,4 +21,8 @@ void Tests::OutputFinalResults() const {
 void Tests::Processing() {
     isValid_ = Algorithms::CheckAllDataBases(dataController_);
     OutputFinalResults();
+}
+
+DataController *Tests::getDataController() const {
+    return dataController_;
 }

@@ -9,9 +9,7 @@ bool Algorithms::CompareSolutions(const std::vector<int> &solved, const std::vec
         if(*solve++ != *target++)
             return false;
     }
-    if(solve != solved.cend())
-        return false;
-    if(target != targeted.cend())
+    if(solve != solved.cend() || target != targeted.cend())
         return false;
     return true;
 }
@@ -54,6 +52,15 @@ void Algorithms::ReInitData(const Node &node, Algorithms::Iterator &iterator, in
     leftValue = node.getLeftValue();
 }
 
+Slot Algorithms::getSlot(const int &number, const int &sum, Slot *slot) {
+    if(slot[sum].getIsReachable()) {
+        if(number >= slot[sum].getLevel())
+            return slot[sum];
+        return Slot(number, false, slot->getBitset());
+    }
+    return slot[sum];
+}
+
 // value pass in parameter, the copy happens in the passing process
 Node::Node(std::string bitset, Algorithms::Iterator iterator, int currentValue, int leftValue) :
         bitset_(std::move(bitset)), iterator_(iterator), currentValue_(currentValue), leftValue_(leftValue) {
@@ -73,4 +80,22 @@ int Node::getCurrentValue() const {
 
 int Node::getLeftValue() const {
     return leftValue_;
+}
+
+
+Slot::Slot(int level, bool isReachable, std::string bitset) :
+        level_(level), isReachable_(isReachable), bitset_(std::move(bitset)) {
+
+}
+
+int Slot::getLevel() const {
+    return level_;
+}
+
+bool Slot::getIsReachable() const {
+    return isReachable_;
+}
+
+const std::string &Slot::getBitset() const {
+    return bitset_;
 }
