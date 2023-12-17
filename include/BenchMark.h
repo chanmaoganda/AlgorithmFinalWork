@@ -7,8 +7,12 @@ public:
     explicit BenchMark(const char* message);
 
     ~BenchMark();
+
+    bool setValidation(bool validation);
 private:
     Timer timer_;
+
+    bool validation_;
 
     std::string testName_;
 };

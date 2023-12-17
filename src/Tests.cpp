@@ -15,12 +15,13 @@ void Tests::OutputFinalResults() const {
         std::cout << "\033[32m all databases and algorithms passed!\n"
                      "\tCongratulations!\033[0m\n";
     else
-        std::cout << "some bugs maybe still exist, come on, man!\n";
+        std::cout << "\033[31m" << "some bugs maybe still exist, come on, man!\033[0m\n";
 }
 
 void Tests::Processing() {
     isValid_ = Algorithms::CheckAllDataBases(dataController_);
     OutputFinalResults();
+    std::cin.get();
 }
 
 DataController *Tests::getDataController() const {

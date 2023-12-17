@@ -3,7 +3,7 @@
 bool Algorithms::CheckAllDataBases(DataController* dataController) {
     bool validation = true;
     validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController, "BackTracing");
-//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController);
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController, "DynamicAssignments");
     validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController, "BranchAndBound");
     return validation;
 }
@@ -27,8 +27,7 @@ bool Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::SolveProblem solvePro
     validation &= solveProblem(algorithmData->getValues(),
                                algorithmData->getSolutions(),
                                algorithmData->getTargetValue());
-
-    return validation;
+    return benchMark.setValidation(validation);
 }
 
 bool Algorithms::DynamicAssignments(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
