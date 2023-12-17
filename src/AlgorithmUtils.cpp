@@ -1,4 +1,36 @@
+#include <utility>
+
 #include "../include/Algorithms.h"
+
+bool Algorithms::CheckAllDataBases(DataController* dataController) {
+    bool validation = true;
+//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController, "BackTracing");
+    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController, "DynamicAssignments");
+//    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController, "BranchAndBound");
+    return validation;
+}
+
+bool Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::SolveProblem solveProblem, const DataController& dataController, const char* algorithmName) {
+    BenchMark benchMark(algorithmName);
+    AlgorithmData* algorithmData;
+    bool validation = true;
+
+//    algorithmData = dataController.getPAlgorithmData1();
+//    validation &= solveProblem(algorithmData->getValues(),
+//                               algorithmData->getSolutions(),
+//                               algorithmData->getTargetValue());
+//
+//    algorithmData = dataController.getPAlgorithmData2();
+//    validation &= solveProblem(algorithmData->getValues(),
+//                               algorithmData->getSolutions(),
+//                               algorithmData->getTargetValue());
+
+    algorithmData = dataController.getPAlgorithmData3();
+    validation &= solveProblem(algorithmData->getValues(),
+                               algorithmData->getSolutions(),
+                               algorithmData->getTargetValue());
+    return benchMark.setValidation(validation);
+}
 
 bool Algorithms::CompareSolutions(const std::vector<int> &solved, const std::vector<int> &targeted) {
     if(solved.size() != targeted.size())
@@ -52,15 +84,6 @@ void Algorithms::ReInitData(const Node &node, Algorithms::Iterator &iterator, in
     leftValue = node.getLeftValue();
 }
 
-Slot Algorithms::getSlot(const int &number, const int &sum, Slot *slot) {
-    if(slot[sum].getIsReachable()) {
-        if(number >= slot[sum].getLevel())
-            return slot[sum];
-        return Slot(number, false, slot->getBitset());
-    }
-    return slot[sum];
-}
-
 // value pass in parameter, the copy happens in the passing process
 Node::Node(std::string bitset, Algorithms::Iterator iterator, int currentValue, int leftValue) :
         bitset_(std::move(bitset)), iterator_(iterator), currentValue_(currentValue), leftValue_(leftValue) {
@@ -82,20 +105,87 @@ int Node::getLeftValue() const {
     return leftValue_;
 }
 
-
-Slot::Slot(int level, bool isReachable, std::string bitset) :
-        level_(level), isReachable_(isReachable), bitset_(std::move(bitset)) {
+Slot::Slot() :
+validLevel_(0), isReachable_(false), bitset_(std::string("")){
 
 }
 
-int Slot::getLevel() const {
-    return level_;
+Slot::Slot(int level, bool isReachable, std::string bitset) :
+        validLevel_(level), isReachable_(isReachable), bitset_(std::move(bitset)) {
+}
+
+int Slot::getValidLevel_() const {
+    return validLevel_;
 }
 
 bool Slot::getIsReachable() const {
     return isReachable_;
 }
 
-const std::string &Slot::getBitset() const {
+std::string Slot::getBitset() const {
     return bitset_;
 }
+
+Slot& Slot::setValidLevel(int validLevel) {
+    if(validLevel < validLevel_)
+        validLevel_ = validLevel;
+    return *this;
+}
+
+Slot& Slot::setIsReachable(bool isReachable) {
+    isReachable_ = isReachable;
+    return *this;
+}
+
+Slot& Slot::setBitset(std::string bitset) {
+    bitset_ = std::move(bitset);
+    return *this;
+}
+
+Slot& Slot::addBitset(char ch) {
+    bitset_ += ch;
+    return *this;
+}
+
+bool Algorithms::findIsValid(const std::vector<Slot> &slots, int level, int targetValue) {
+    if(slots[targetValue].getIsReachable())
+        return slots[targetValue].getValidLevel_() <= level;
+    return false;
+}
+
+bool Algorithms::generateBiggerSlot(const std::vector<int> &dataBase, std::vector<Slot> &slots, int level, int targetValue) {
+    Slot &slot = slots[targetValue];
+    if (slot.getIsReachable()) {
+        slot.addBitset('0');
+        return true;
+    }
+    if (dataBase[level - 1] > targetValue) {
+        if (findIsValid(slots, level - 1, targetValue)) {
+            slot.setIsReachable(true)
+            .setValidLevel(level)
+            .addBitset('0');
+            return true;
+        }
+        return false;   //by default, we set the Slot(reachAble:false, validLevel:0)
+    }
+    if (findIsValid(slots, level - 1, targetValue - dataBase[level - 1])) {
+        slot.setIsReachable(true)
+        .setValidLevel(level)
+        .setBitset(slots[targetValue - dataBase[level - 1]].getBitset() + '1');
+        return true;
+    }
+    if (findIsValid(slots, level - 1, targetValue)) {
+        slot.setIsReachable(true)
+        .setValidLevel(level)
+        .addBitset('0');
+        return false;
+    }
+    slot.addBitset('0');
+    return false;
+}
+
+
+
+
+
+

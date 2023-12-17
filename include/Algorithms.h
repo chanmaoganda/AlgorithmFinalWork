@@ -13,6 +13,7 @@ class Slot;
 class Algorithms{
 public:
     typedef bool(*SolveProblem)(const std::vector<int>& dataBases, const Solutions &solutions, const int& targetValue);
+    //back trace
     typedef std::vector<int>::const_iterator Iterator;
 
     Algorithms() = delete;
@@ -51,11 +52,14 @@ protected:
 
     static bool BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 
-    static Slot getSlot(const int &number, const int &num, Slot *slot);
+    static bool findIsValid(const std::vector<Slot> &slots, int level, int targetValue);
+
+    static bool generateBiggerSlot(const std::vector<int> &dataBase, std::vector<Slot> &slots, int level, int targetValue);
 
     static bool DynamicAssignments_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 };
 
+//branch and bound
 class Node {
 public:
     explicit Node(std::string bitset, Algorithms::Iterator iterator, int currentValue, int leftValue);
@@ -83,30 +87,45 @@ protected:
     int leftValue_;
 };
 
+//dynamic assignment
+//https://www.jianshu.com/p/0322014dc357
 class Slot {
 public:
     explicit Slot();
 
     explicit Slot(int level, bool isReachable, std::string bitset);
 
+
     ~Slot() = default;
 
     Slot(const Slot &) = default;
 
     _GLIBCXX_NODISCARD
-    int getLevel() const;
+    int getValidLevel_() const;
 
     _GLIBCXX_NODISCARD
     bool getIsReachable() const;
 
     _GLIBCXX_NODISCARD
-    const std::string &getBitset() const;
+    std::string getBitset() const;
+
+    Slot& setValidLevel(int validLevel);
+
+    Slot& setIsReachable(bool isReachable);
+
+    Slot& setBitset(std::string bitset);
+
+    Slot& addBitset(char ch);
 
 protected:
-    int level_;
+    int validLevel_;
     bool isReachable_;
     std::string bitset_;
-
 };
 
 #endif //ALGORITHMS_H
+
+
+
+
+

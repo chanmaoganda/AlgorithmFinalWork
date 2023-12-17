@@ -1,36 +1,9 @@
 #include "../include/Algorithms.h"
 
-bool Algorithms::CheckAllDataBases(DataController* dataController) {
-    bool validation = true;
-    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BackTracing, *dataController, "BackTracing");
-    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::DynamicAssignments, *dataController, "DynamicAssignments");
-    validation &= Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::BranchAndBound, *dataController, "BranchAndBound");
-    return validation;
-}
-
-bool Algorithms::CheckIsValidOfSingleAlgorithm(Algorithms::SolveProblem solveProblem, const DataController& dataController, const char* algorithmName) {
-    BenchMark benchMark(algorithmName);
-    AlgorithmData* algorithmData;
-    bool validation = true;
-
-    algorithmData = dataController.getPAlgorithmData1();
-    validation &= solveProblem(algorithmData->getValues(),
-                               algorithmData->getSolutions(),
-                               algorithmData->getTargetValue());
-
-    algorithmData = dataController.getPAlgorithmData2();
-    validation &= solveProblem(algorithmData->getValues(),
-                               algorithmData->getSolutions(),
-                               algorithmData->getTargetValue());
-
-    algorithmData = dataController.getPAlgorithmData3();
-    validation &= solveProblem(algorithmData->getValues(),
-                               algorithmData->getSolutions(),
-                               algorithmData->getTargetValue());
-    return benchMark.setValidation(validation);
-}
-
 bool Algorithms::DynamicAssignments(const std::vector<int> &dataBases, const Solutions &solutions, const int& targetValue) {
+    std::vector<int> resultsStored = std::vector<int>(dataBases.size());
+    if(DynamicAssignments_(dataBases, targetValue, resultsStored))
+        return CompareSolutions(resultsStored, solutions.getSolutionArray());
     return false;
 }
 
@@ -103,15 +76,31 @@ bool Algorithms::BranchAndBound_(const std::vector<int> &dataBases, const int &t
 }
 
 bool Algorithms::DynamicAssignments_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored) {
-//    std::vector< std::vector<int> > array = std::vector< std::vector<int> >();
-//    Slot *slots = new Slot[targetValue];
-//
-//    for(int i = 0; i < dataBases.size(); i++) {
-//        for(int j = 0; j < targetValue; j++) {
-//
-//        }
-//    }
+    std::vector<Slot> slots = std::vector<Slot>(targetValue + 1); // allow zero to be pushed in
+    slots[0].setIsReachable(true);
+    for(int level = 1; level < dataBases.size(); level++) {
+        for(int target = 0; target <= targetValue; target++) {
+            generateBiggerSlot(dataBases, slots, level, target);
+        }
+    }
+    if(slots[targetValue].getIsReachable()) {
+        Bitset2Vector(slots[targetValue].getBitset(), resultsStored);
+        return true;
+    }
     return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
