@@ -52,9 +52,9 @@ protected:
 
     static bool BranchAndBound_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 
-    static bool findIsValid(const std::vector<Slot> &slots, int level, int targetValue);
+    static bool findIsValid(const std::vector<Slot*> &slots, int level, int targetValue);
 
-    static bool generateBiggerSlot(const std::vector<int> &dataBase, std::vector<Slot> &slots, int level, int targetValue);
+    static bool generateBiggerSlot(const std::vector<int> &dataBase, std::vector<Slot*> &slots, int level, int targetValue);
 
     static bool DynamicAssignments_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored);
 };

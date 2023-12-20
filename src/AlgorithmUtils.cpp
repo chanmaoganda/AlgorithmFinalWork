@@ -147,21 +147,23 @@ Slot& Slot::addBitset(char ch) {
     return *this;
 }
 
-bool Algorithms::findIsValid(const std::vector<Slot> &slots, int level, int targetValue) {
-    if(slots[targetValue].getIsReachable())
-        return slots[targetValue].getValidLevel_() <= level;
+bool Algorithms::findIsValid(const std::vector<Slot*> &slots, int level, int targetValue) {
+    if(slots[targetValue]->getValidLevel_() == 0 && targetValue != 0)
+        return false;
+    if(slots[targetValue]->getIsReachable())
+        return slots[targetValue]->getValidLevel_() <= level;
     return false;
 }
 
-bool Algorithms::generateBiggerSlot(const std::vector<int> &dataBase, std::vector<Slot> &slots, int level, int targetValue) {
-    Slot &slot = slots[targetValue];
-    if (slot.getIsReachable()) {
-        slot.addBitset('0');
+bool Algorithms::generateBiggerSlot(const std::vector<int> &dataBase, std::vector<Slot*> &slots, int level, int targetValue) {
+    Slot* slot = slots[targetValue];
+    if (slot->getIsReachable()) {
+        slot->addBitset('0');
         return true;
     }
     if (dataBase[level - 1] > targetValue) {
         if (findIsValid(slots, level - 1, targetValue)) {
-            slot.setIsReachable(true)
+            slot->setIsReachable(true)
             .setValidLevel(level)
             .addBitset('0');
             return true;
@@ -169,18 +171,18 @@ bool Algorithms::generateBiggerSlot(const std::vector<int> &dataBase, std::vecto
         return false;   //by default, we set the Slot(reachAble:false, validLevel:0)
     }
     if (findIsValid(slots, level - 1, targetValue - dataBase[level - 1])) {
-        slot.setIsReachable(true)
+        slot->setIsReachable(true)
         .setValidLevel(level)
-        .setBitset(slots[targetValue - dataBase[level - 1]].getBitset() + '1');
+        .setBitset(slots[targetValue - dataBase[level - 1]]->getBitset() + '1');
         return true;
     }
     if (findIsValid(slots, level - 1, targetValue)) {
-        slot.setIsReachable(true)
+        slot->setIsReachable(true)
         .setValidLevel(level)
         .addBitset('0');
         return false;
     }
-    slot.addBitset('0');
+    slot->addBitset('0');
     return false;
 }
 

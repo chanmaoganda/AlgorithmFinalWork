@@ -76,17 +76,21 @@ bool Algorithms::BranchAndBound_(const std::vector<int> &dataBases, const int &t
 }
 
 bool Algorithms::DynamicAssignments_(const std::vector<int> &dataBases, const int &targetValue, std::vector<int> &resultsStored) {
-    std::vector<Slot> slots = std::vector<Slot>(targetValue + 1); // allow zero to be pushed in
-    slots[0].setIsReachable(true);
+    std::vector<Slot*> slots = std::vector<Slot*>(targetValue + 1); // allow zero to be pushed in
+    for(auto &slot : slots)
+        slot = new Slot(0, false, "");
+    slots[0]->setIsReachable(true);
     for(int level = 1; level < dataBases.size(); level++) {
-        for(int target = 0; target <= targetValue; target++) {
+        for(int target = 1; target <= targetValue; target++) {
             generateBiggerSlot(dataBases, slots, level, target);
         }
     }
-    if(slots[targetValue].getIsReachable()) {
-        Bitset2Vector(slots[targetValue].getBitset(), resultsStored);
+    if(slots[targetValue]->getIsReachable()) {
+        Bitset2Vector(slots[targetValue]->getBitset(), resultsStored);
         return true;
     }
+    for(auto &slot : slots)
+        delete slot;
     return false;
 }
 
